@@ -36,6 +36,7 @@ export const UserProvider = ({ children }) => {
     setDetailLoading(true);
     try {
       const response = await axios.get(`https://jsonplaceholder.typicode.com/users/${userId}`);
+      await new Promise(resolve => setTimeout(resolve, 1000));
       setSelectedUser(response.data);
     } catch (error) {
       console.error('Error fetching user details:', error);
