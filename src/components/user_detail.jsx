@@ -6,7 +6,10 @@ import { UserContext } from '../context/user_context';
 import LoadingSpinner from './loading_spinner';
 
 const UserDetail = () => {
+  // Se obtienen las funciones y el estado del contexto
   const { selectedUser, detailLoading, fetchUserDetails, setSelectedUser } = useContext(UserContext);
+
+  // Se obtiene el ID y el uso de Hook para la navegación
   const { id } = useParams();
   const navigate = useNavigate();
 
@@ -19,10 +22,12 @@ const UserDetail = () => {
     };
   }, [id]);
 
+  // Spinner de carga
   if (detailLoading) {
     return <LoadingSpinner />;
   }
 
+  // Mensaje para usuarios no encontrados
   if (!selectedUser) {
     return <div className="text-center py-8">No se encontró información del usuario</div>;
   }
