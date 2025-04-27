@@ -1,4 +1,5 @@
 import { useContext } from 'react';
+import '../styles/search_bar.css';
 
 import { UserContext } from '../context/user_context';
 
@@ -6,14 +7,16 @@ const SearchBar = () => {
   const { searchTerm, setSearchTerm } = useContext(UserContext);
 
   return (
-    <div className="mb-8">
-      <input
-        type="text"
-        placeholder="Search by name or email..."
-        value={searchTerm}
-        onChange={(e) => setSearchTerm(e.target.value)}
-        className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-      />
+    <div className="search-panels flex items-center justify-center">
+      <div className="search-group">
+        <input required type="text" name="text" autoComplete="on" className="input" value={searchTerm} onChange={(e) => setSearchTerm(e.target.value)} />
+        <label className="enter-label">Ingresa El Nombre O Correo Del Usuario</label>
+        <div className="btn-box">
+          <button className="btn-search">
+            <svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 512 512"><path d="M416 208c0 45.9-14.9 88.3-40 122.7L502.6 457.4c12.5 12.5 12.5 32.8 0 45.3s-32.8 12.5-45.3 0L330.7 376c-34.4 25.2-76.8 40-122.7 40C93.1 416 0 322.9 0 208S93.1 0 208 0S416 93.1 416 208zM208 352a144 144 0 1 0 0-288 144 144 0 1 0 0 288z" /><circle id="svg-circle" cx={208} cy={208} r={144} /></svg>
+          </button>
+        </div>
+      </div>
     </div>
   );
 };

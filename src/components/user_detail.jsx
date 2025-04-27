@@ -1,4 +1,4 @@
-import { useContext, useEffect } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 
 import { UserContext } from '../context/user_context';
@@ -6,20 +6,43 @@ import LoadingSpinner from './loading_spinner';
 
 const UserDetail = () => {
   const { selectedUser, detailLoading, fetchUserDetails, setSelectedUser } = useContext(UserContext);
+  const [error, setError] = useState(null);
   const { id } = useParams();
   const navigate = useNavigate();
 
+  console.log('UserDetail rendering - ID:', id);
+  console.log('Current state - detailLoading:', detailLoading, 'selectedUser:', selectedUser);
+
   useEffect(() => {
-    fetchUserDetails(id);
+    console.log('UserDetail useEffect - Fetching user with ID:', id);
+    
+    if (id) {
+      fetchUserDetails(id);
+    } else {
+      setError('ID de usuario no válido');
+    }
     
     return () => {
+      console.log('UserDetail unmounting - clearing selectedUser');
       setSelectedUser(null);
     };
   }, [id, fetchUserDetails, setSelectedUser]);
 
-  if (detailLoading || !selectedUser) {
+  if (error) {
+    return <div className="text-red-500 text-center py-8">{error}</div>;
+  }
+
+  if (detailLoading) {
+    console.log('Showing loading spinner');
     return <LoadingSpinner />;
   }
+
+  if (!selectedUser) {
+    console.log('No user found, but loading completed');
+    return <div className="text-center py-8">No se encontró información del usuario</div>;
+  }
+
+  console.log('Rendering user details for:', selectedUser.name);
 
   return (
     <div className="container mx-auto px-4 py-8 max-w-2xl">

@@ -10,7 +10,7 @@ const UserList = () => {
 
   return (
     <div className="container mx-auto px-4 py-8">
-      <h1 className="text-3xl font-bold text-center mb-8 text-gray-800">User Directory</h1>
+      <h1 className="text-3xl font-bold text-center mb-8">Lista de Usuarios Disponibles</h1>
       
       <SearchBar searchTerm={searchTerm} setSearchTerm={setSearchTerm} />
       
@@ -25,7 +25,7 @@ const UserList = () => {
       )}
       
       {!loading && users.length === 0 && (
-        <p className="text-center text-gray-500 mt-8">No users found matching your search.</p>
+        <p className="text-center text-gray-500 mt-8">Al parecer no existe el usuario, intenta probar de nuevo . . .</p>
       )}
     </div>
   );
